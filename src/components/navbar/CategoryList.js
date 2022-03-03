@@ -12,8 +12,12 @@ const CategoryList = ({ close, categories }) => {
     <div className="category-list cl-section">
       <ul>
         {categories.data.map((category) => (
-          <Link href={`/results/${category.name}`} onClick={close}>
-            <li key={category.name}>{category.name}</li>
+          <Link
+            href={`/results/${category.name}`}
+            key={category.name}
+            onClick={close}
+          >
+            <li>{category.name}</li>
           </Link>
         ))}
       </ul>

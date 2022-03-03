@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import "./navbar.css";
 import { HiSearch, HiUserCircle, HiShoppingCart } from "react-icons/hi";
 import SearchBox from "./SearchBox";
@@ -11,6 +11,7 @@ import { auth, db } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 const Navbar = () => {
+  const [, setLocation] = useLocation();
   const cart = useSelector((state) => state.cart);
   const [phrase, setPhrase] = useState("");
   const [showSearchBox, setShowSearchBox] = useState(false);
@@ -46,9 +47,14 @@ const Navbar = () => {
         </div>
         <div className="navbar-options">
           <div className="navbar-account">
-            <span onClick={() => {}} className="navbar-icon-link">
+            <span
+              onClick={() =>
+                loggedIn ? setLocation("/profile") : setLocation("/login")
+              }
+              className="navbar-icon-link"
+            >
               <HiUserCircle size={22} className="icon" />
-              <div>{loggedIn ? "Account" : "Log in"}</div>
+              <div>{loggedIn ? "Profile" : "Log in"}</div>
             </span>
           </div>
           <Link

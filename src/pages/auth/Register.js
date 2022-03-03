@@ -17,7 +17,12 @@ const Register = () => {
         data.password
       );
       const userDoc = doc(db, "users", res.user.uid);
-      await setDoc(userDoc, { name: data.name, surname: data.surname });
+      await setDoc(userDoc, {
+        name: data.name,
+        surname: data.surname,
+        id: res.user.uid,
+        email: data.email,
+      });
       setLocation("/");
     } catch (err) {
       console.log(err);

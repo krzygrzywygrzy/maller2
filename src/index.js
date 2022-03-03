@@ -10,6 +10,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Cart from "./pages/cart/Cart";
 import Home from "./pages/home/Home";
+import Profile from "./pages/profile/Profile";
 import Results from "./pages/results/Results";
 import reportWebVitals from "./reportWebVitals";
 import { store, persistor } from "./store/store";
@@ -35,6 +36,9 @@ ReactDOM.render(
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/profile">
+              <Profile />
             </Route>
           </div>
           <Footer />
