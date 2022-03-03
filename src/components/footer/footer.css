@@ -1,0 +1,24 @@
+footer {
+  background: #373f51;
+  color: white;
+  font-weight: 400;
+  width: calc(100% - 2rem);
+  padding: 1rem;
+}
+
+footer > div {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1000px) {
+  footer > div {
+    width: 100%;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.75rem;
+    width: calc(100vw - 2rem);
+  }
+}

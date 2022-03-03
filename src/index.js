@@ -1,10 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/navbar/Navbar";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import { store, persistor } from "./store/store";
 
 ReactDOM.render(
-  <React.StrictMode></React.StrictMode>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <div className="page">
+          <div className="content-wrapper">
+            <Navbar />
+          </div>
+          <Footer />
+        </div>
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 
