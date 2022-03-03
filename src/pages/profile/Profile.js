@@ -18,7 +18,7 @@ const Profile = () => {
         if (!user.data) dispatch(getUser(user.uid));
       }
     });
-  }, [goHome]);
+  }, [goHome, dispatch]);
 
   const handleLogOut = () => {
     signOut();
