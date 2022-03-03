@@ -6,8 +6,11 @@ import { Route } from "wouter";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import "./index.css";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 import Cart from "./pages/cart/Cart";
 import Home from "./pages/home/Home";
+import Results from "./pages/results/Results";
 import reportWebVitals from "./reportWebVitals";
 import { store, persistor } from "./store/store";
 
@@ -23,6 +26,15 @@ ReactDOM.render(
             </Route>
             <Route path="/cart">
               <Cart />
+            </Route>
+            <Route path="/results/:query">
+              {(params) => <Results query={params.query} />}
+            </Route>
+            <Route path="/signup">
+              <Register />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
           </div>
           <Footer />

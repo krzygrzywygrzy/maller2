@@ -56,7 +56,10 @@ const Navbar = () => {
         </div>
       </div>
       <div className="category-container">
-        <div className="categories" onClick={() => setShowCategories(true)}>
+        <div
+          className="categories"
+          onClick={() => setShowCategories(!showCategories)}
+        >
           Categories
         </div>
       </div>
