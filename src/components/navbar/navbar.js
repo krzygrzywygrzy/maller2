@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import "./navbar.css";
 import { HiSearch, HiUserCircle, HiShoppingCart } from "react-icons/hi";
@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 import CategoryList from "./CategoryList";
 import useFirebaseFetch from "../../utils/useFirebaseFetch";
 import { collection } from "firebase/firestore";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
@@ -19,6 +20,13 @@ const Navbar = () => {
 
   const handleChange = (event) => {};
   const closeMenu = () => setShowCategories(false);
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) =>
+      user ? setLoggedIn(true) : setLoggedIn(false)
+    );
+  }, []);
 
   return (
     <div className="navbar">
@@ -40,7 +48,7 @@ const Navbar = () => {
           <div className="navbar-account">
             <span onClick={() => {}} className="navbar-icon-link">
               <HiUserCircle size={22} className="icon" />
-              <div>Log in</div>
+              <div>{loggedIn ? "Account" : "Log in"}</div>
             </span>
           </div>
           <Link

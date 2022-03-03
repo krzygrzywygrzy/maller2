@@ -1,11 +1,28 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import "./auth.css";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const Register = () => {
+  const [, setLocation] = useLocation();
   const { register, handleSubmit } = useForm();
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data) => {
+    try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      const userDoc = doc(db, "users", res.user.uid);
+      await setDoc(userDoc, { name: data.name, surname: data.surname });
+      setLocation("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="container">
