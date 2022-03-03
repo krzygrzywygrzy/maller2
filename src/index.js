@@ -6,6 +6,7 @@ import { Route } from "wouter";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import "./index.css";
+import Cart from "./pages/cart/Cart";
 import Home from "./pages/home/Home";
 import reportWebVitals from "./reportWebVitals";
 import { store, persistor } from "./store/store";
@@ -19,6 +20,9 @@ ReactDOM.render(
             <Navbar />
             <Route path="/">
               <Home />
+            </Route>
+            <Route path="/cart">
+              <Cart />
             </Route>
           </div>
           <Footer />

@@ -1,10 +1,10 @@
 import { combineReducers, createStore } from "redux";
-import basketReducer from "./reducers/basketReducer";
+import cartReducer from "./reducers/cartReducer";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const rootReducer = combineReducers({
-  basket: basketReducer,
+  cart: cartReducer,
 });
 
 const persistConfig = {

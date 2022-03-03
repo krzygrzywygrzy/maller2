@@ -6,11 +6,11 @@ import SearchBox from "./SearchBox";
 import { useSelector } from "react-redux";
 import CategoryList from "./CategoryList";
 import useFirebaseFetch from "../../utils/useFirebaseFetch";
-import { collection } from "firebase/firestore/lite";
+import { collection } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const Navbar = () => {
-  const basket = useSelector((state) => state.basket);
+  const cart = useSelector((state) => state.cart);
   const [phrase, setPhrase] = useState("");
   const [showSearchBox, setShowSearchBox] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
@@ -44,13 +44,13 @@ const Navbar = () => {
             </span>
           </div>
           <Link
-            href="/basket"
+            href="/cart"
             onClick={() => closeMenu()}
             className="navbar-icon-link"
           >
             <HiShoppingCart size={22} />
             <div>
-              Cart <span className="goods-amount">{basket.length}</span>
+              Cart <span className="goods-amount">{cart.length}</span>
             </div>
           </Link>
         </div>

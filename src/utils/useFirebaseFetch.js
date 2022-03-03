@@ -11,10 +11,12 @@ const useFirebaseFetch = (query) => {
     const get = async () => {
       try {
         setLoading(true);
-        const snapshot = await getDocs();
+        const snapshot = await getDocs(query);
+        const items = [];
         snapshot.forEach((doc) => {
-          setData([...data, doc.data()]);
+          items.push(doc.data());
         });
+        setData(items);
       } catch (err) {
         setError(err.message);
       } finally {
