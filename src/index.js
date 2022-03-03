@@ -2,9 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { Route } from "wouter";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import "./index.css";
+import Home from "./pages/home/Home";
 import reportWebVitals from "./reportWebVitals";
 import { store, persistor } from "./store/store";
 
@@ -15,6 +17,9 @@ ReactDOM.render(
         <div className="page">
           <div className="content-wrapper">
             <Navbar />
+            <Route path="/">
+              <Home />
+            </Route>
           </div>
           <Footer />
         </div>
