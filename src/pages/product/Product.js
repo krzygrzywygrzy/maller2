@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import useGetProduct from "../../utils/useGetProduct";
 import "./product.css";
 import ProductImage from "./ProductImage";
 
 const Product = ({ id }) => {
+  const dispatch = useDispatch();
+
   const { data, loading, error } = useGetProduct(id);
   const [amount, setAmount] = useState(1);
 
@@ -17,7 +20,6 @@ const Product = ({ id }) => {
       <div className="product-name">{data.name}</div>
       <div className="mid-section">
         <ProductImage image={data.image} />
-
         <div className="mid-section-buy">
           <div className="buy-price">{data.price}$</div>
           <div className="buy-form">

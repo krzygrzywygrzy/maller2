@@ -7,11 +7,7 @@ const ProductImage = ({ image }) => {
 
   return (
     <div className="mid-section-photos">
-      {image && url ? (
-        <img alt="" src={url} />
-      ) : (
-        <div className="no-img">No image provided</div>
-      )}
+      {image && url ? <img alt="" src={url} /> : <div className="no-img"></div>}
     </div>
   );
 };
