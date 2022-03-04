@@ -10,7 +10,7 @@ const Product = ({ id }) => {
   const { data, loading, error } = useGetProduct(id);
   const [amount, setAmount] = useState(1);
 
-  const handleBasket = () => {};
+  const handleBasket = () => dispatch();
 
   if (loading) return <div className="container">Loading...</div>;
   if (error) return <div className="container">Error: {error}</div>;
@@ -27,7 +27,7 @@ const Product = ({ id }) => {
               type="number"
               value={amount}
               onChange={(e) => setAmount(parseInt(e.target.value))}
-              min={0}
+              min={1}
             />
             <button onClick={() => handleBasket()}>Add to basket</button>
           </div>
