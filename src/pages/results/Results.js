@@ -6,15 +6,16 @@ import "./results.css";
 const Results = ({ query }) => {
   const { data, loading, error } = useAlgoliaPhraseSearch(query);
 
-  if (loading) return <div className="container">Loading...</div>;
-  if (error) return <div className="container">Error: {error}</div>;
+  if (loading) return <div className="container mobile-margin">Loading...</div>;
+  if (error)
+    return <div className="container mobile-margin">Error: {error}</div>;
 
   return data ? (
     <div className="container">
       {data.length > 0 ? (
         <div className="product-grid">
           {data.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.objectID} product={product} />
           ))}
         </div>
       ) : (

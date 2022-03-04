@@ -6,9 +6,9 @@ const ProductImage = ({ image }) => {
   const url = useGetImageUrl(image);
 
   return (
-    <div className="mid-section-photos">
+    <>
       {image && url ? <img alt="" src={url} /> : <div className="no-img"></div>}
-    </div>
+    </>
   );
 };
 

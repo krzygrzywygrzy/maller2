@@ -10,7 +10,9 @@ const useAlgoliaPhraseSearch = (query) => {
     const get = async () => {
       try {
         setLoading(true);
-        var res = await algolia_products.search(query);
+        var res = await algolia_products.search(query, {
+          attributesToRetrieve: ["name", "price", "image"],
+        });
         setData(res.hits);
       } catch (err) {
         setError(err.message);

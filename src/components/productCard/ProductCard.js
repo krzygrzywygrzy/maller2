@@ -5,10 +5,11 @@ import "./productCard.css";
 
 const ProductCard = ({ product }) => {
   const url = useGetImageUrl(product.image);
+  console.log(product);
 
   return (
     <div className="product-card">
-      <Link href={`/product/${product.id}`}>
+      <Link href={`/product/${product.objectID}`}>
         <div className="product-img">
           {product.image && url ? (
             <img alt="" src={url} />

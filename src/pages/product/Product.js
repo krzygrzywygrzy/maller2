@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/actions/cartActions";
 import useGetProduct from "../../utils/useGetProduct";
 import "./product.css";
 import ProductImage from "./ProductImage";
@@ -10,16 +11,21 @@ const Product = ({ id }) => {
   const { data, loading, error } = useGetProduct(id);
   const [amount, setAmount] = useState(1);
 
-  const handleBasket = () => dispatch();
+  const handleBasket = () =>
+    dispatch(addToCart({ id, amount, price: data.price }));
 
-  if (loading) return <div className="container">Loading...</div>;
-  if (error) return <div className="container">Error: {error}</div>;
+  if (loading) return <div className="container mobile-margin">Loading...</div>;
+  if (error)
+    return <div className="container mobile-margin">Error: {error}</div>;
 
   return data ? (
     <div className="container product-display">
       <div className="product-name">{data.name}</div>
       <div className="mid-section">
-        <ProductImage image={data.image} />
+        <div className="mid-section-photos">
+          <ProductImage image={data.image} />
+        </div>
+
         <div className="mid-section-buy">
           <div className="buy-price">{data.price}$</div>
           <div className="buy-form">

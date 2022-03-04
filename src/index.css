@@ -110,6 +110,10 @@ button {
 }
 
 @media (max-width: 1000px) {
+  .mobile-margin {
+    margin: 0 1rem;
+  }
+
   .container {
     width: 100%;
   }

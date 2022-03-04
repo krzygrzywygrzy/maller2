@@ -10,7 +10,9 @@ const useGetProduct = (id) => {
     const get = async () => {
       try {
         // eslint-disable-next-line
-        var res = await algolia_products.findObject((hit) => hit.id == id);
+        var res = await algolia_products.findObject(
+          (hit) => hit.objectID == id
+        );
         setData(res.object);
       } catch (err) {
         setError(err.message);
