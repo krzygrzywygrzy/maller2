@@ -1,0 +1,36 @@
+.cart-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cart-card-photo {
+  height: 50px;
+  width: 50px;
+  margin-right: 1rem;
+}
+
+.cart-card-photo > img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-card-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cart-card-info > .name:hover {
+  text-decoration: underline;
+}
+
+.cart-card-info > .amount {
+  width: 2rem;
+}
+
+.cart-card-info > .delete {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

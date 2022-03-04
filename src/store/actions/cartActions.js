@@ -23,7 +23,7 @@ export const clearCart = () => {
   return (dispatch) => dispatch({ type: "cart_set", payload: [] });
 };
 
-export const changeAmount = ({ index, newAmount }) => {
+export const changeAmount = (index, newAmount) => {
   return (dispatch, getState) => {
     let cart = getState().cart;
     cart[index].amount = newAmount;
@@ -31,4 +31,11 @@ export const changeAmount = ({ index, newAmount }) => {
   };
 };
 
-export const removeFromCart = (index) => {};
+export const removeFromCart = (id) => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: "cart_set",
+      payload: getState().cart.filter((el) => el.id !== id),
+    });
+  };
+};

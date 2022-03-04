@@ -7,7 +7,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const total = useCallback(() => {
     let t = 0;
-    for (let product in cart) {
+    for (let product of cart) {
       t += product.amount * product.price;
     }
     return t;

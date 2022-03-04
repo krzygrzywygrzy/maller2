@@ -5,7 +5,6 @@ import "./productCard.css";
 
 const ProductCard = ({ product }) => {
   const url = useGetImageUrl(product.image);
-  console.log(product);
 
   return (
     <div className="product-card">
