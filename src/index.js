@@ -10,6 +10,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Cart from "./pages/cart/Cart";
 import Home from "./pages/home/Home";
+import Product from "./pages/product/Product";
 import Profile from "./pages/profile/Profile";
 import Results from "./pages/results/Results";
 import reportWebVitals from "./reportWebVitals";
@@ -39,6 +40,9 @@ ReactDOM.render(
             </Route>
             <Route path="/profile">
               <Profile />
+            </Route>
+            <Route path="/product/:id">
+              {(params) => <Product id={params.id} />}
             </Route>
           </div>
           <Footer />

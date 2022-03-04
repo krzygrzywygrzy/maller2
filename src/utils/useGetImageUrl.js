@@ -13,7 +13,7 @@ const useGetImageUrl = (image) => {
       } catch {}
     };
     get();
-  }, []);
+  }, [image]);
 
   return data;
 };
