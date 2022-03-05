@@ -1,11 +1,13 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import React, { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "wouter";
 import CartCard from "../../components/cartCard/CartCard";
 import Popup from "../../components/popup/Popup";
 import { auth, db } from "../../firebase";
 import "./cart.css";
+import { v4 } from "uuid";
+import { clearCart } from "../../store/actions/cartActions";
 
 const Cart = () => {
   const [, setLocation] = useLocation();
@@ -22,20 +24,22 @@ const Cart = () => {
     document.title = "cart (" + cart.length + ") | maller";
   }, [cart]);
 
-  const user = useSelector((state) => state.user.data);
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState();
   const [message, setMessage] = useState();
   const handleCheckout = async () => {
     try {
       setLoading(true);
 
-      if (!auth.currentUser || !user)
-        throw Error("You must be logged in to check out!");
+      if (!auth.currentUser) throw Error("You must be logged in to check out!");
 
-      const ref = doc(db, "users", auth.currentUser.uid);
-      await updateDoc(ref, { orders: [...cart, ...user.orders] });
+      const orderId = v4();
+      const ref = doc(db, `users/${auth.currentUser.uid}/orders`, orderId);
+      const order = { ...cart, id: orderId, ordered: Date.now() };
+      setDoc(ref, order);
 
       setMessage("Check out process went successfully!");
+      dispatch(clearCart());
     } catch (err) {
       setMessage(err.message);
     } finally {

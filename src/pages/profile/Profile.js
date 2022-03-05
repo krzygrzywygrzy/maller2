@@ -5,6 +5,7 @@ import { useLocation } from "wouter";
 import "./profile.css";
 import { auth } from "../../firebase";
 import { getUser } from "../../store/actions/userActions";
+import OrderCard from "../../components/orderCard/OrderCard";
 
 const Profile = () => {
   const user = useSelector((state) => state.user);
@@ -27,9 +28,8 @@ const Profile = () => {
     else
       document.title = user.data.name + " " + user.data.surname + " | maller";
 
-    console.log(user);
     // eslint-disable-next-line
-  }, []);
+  }, [user.data]);
 
   const handleLogOut = () => {
     signOut(auth);
@@ -44,7 +44,11 @@ const Profile = () => {
       <section className="profile-orders">
         <div className="title">Your orders</div>
         {user.data.orders.length > 0 ? (
-          <div className="orders-display"></div>
+          <div className="orders-display">
+            {user.data.orders.map((order) => (
+              <OrderCard order={order} key={order.id} />
+            ))}
+          </div>
         ) : (
           <div className="orders-display">You have no orders yet!</div>
         )}
