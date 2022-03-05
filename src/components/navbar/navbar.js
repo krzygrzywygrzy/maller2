@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import "./navbar.css";
 import {
@@ -11,7 +11,7 @@ import SearchBox from "./SearchBox";
 import { useSelector } from "react-redux";
 import CategoryList from "./CategoryList";
 import useFirebaseFetch from "../../utils/useFirebaseFetch";
-import { collection } from "firebase/firestore";
+import { collection, query } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import MobileMenu from "./MobileMenu";
@@ -26,7 +26,11 @@ const Navbar = () => {
 
   const categories = useFirebaseFetch(collection(db, "categories"));
 
-  const handleChange = (event) => {};
+  const handleChange = (event) => {
+    if (!showSearchBox) setShowSearchBox(true);
+    setShowCategories(false);
+    setPhrase(event.target.value);
+  };
   const closeMenu = () => setShowCategories(false);
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -35,6 +39,11 @@ const Navbar = () => {
       user ? setLoggedIn(true) : setLoggedIn(false)
     );
   }, []);
+
+  useEffect(() => {
+    if (phrase.length < 1) setShowSearchBox(false);
+  }, [phrase]);
+  const searchResultsRef = useRef();
 
   return (
     <div className="navbar">
@@ -50,7 +59,11 @@ const Navbar = () => {
             placeholder="BMTH, Neighbourhood..."
           />
           <HiSearch size={18} />
-          {showSearchBox && <SearchBox />}
+          {showSearchBox && (
+            <div ref={searchResultsRef} className="search-box-results">
+              <SearchBox query={phrase} close={() => setShowSearchBox(false)} />
+            </div>
+          )}
         </div>
         <div className="navbar-options">
           <div className="navbar-account">

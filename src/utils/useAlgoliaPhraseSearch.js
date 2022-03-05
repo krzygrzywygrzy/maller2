@@ -9,11 +9,13 @@ const useAlgoliaPhraseSearch = (query) => {
   useEffect(() => {
     const get = async () => {
       try {
-        setLoading(true);
-        var res = await algolia_products.search(query, {
-          attributesToRetrieve: ["name", "price", "image"],
-        });
-        setData(res.hits);
+        if (query.length) {
+          setLoading(true);
+          var res = await algolia_products.search(query, {
+            attributesToRetrieve: ["name", "price", "image"],
+          });
+          setData(res.hits);
+        }
       } catch (err) {
         setError(err.message);
       } finally {

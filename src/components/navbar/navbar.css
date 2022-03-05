@@ -1,5 +1,6 @@
 .navbar {
   position: sticky;
+  top: 0;
   position: -webkit-sticky;
   background: white;
 
@@ -33,13 +34,7 @@
   padding: 0.5rem;
   display: flex;
   width: 30vw;
-}
-
-.search-box > div {
-  border-left: 1px solid #e6e6e6;
-  padding-left: 0.5rem;
-  cursor: pointer;
-  color: #8f8f8f;
+  position: relative;
 }
 
 .category-container {
@@ -193,35 +188,27 @@ li:hover,
   font-weight: 400;
 }
 
+.search-box > div {
+  border-left: 1px solid #e6e6e6;
+  /* padding-left: 0.5rem; */
+  cursor: pointer;
+  color: #8f8f8f;
+}
+
 .search-box-results {
   position: absolute;
+  left: -0.1rem;
+  top: 2.3rem;
   padding: 0.5rem 0;
   border: 1px solid #e6e6e6;
   border-top: none;
   z-index: 1000;
   background: white;
-  width: calc(30vw + 1rem);
+  width: 100%;
 
   -webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.16);
   -moz-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.16);
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.16);
-}
-
-.search-result-card {
-  display: flex;
-  align-items: center;
-  margin: 0.5rem 0;
-  padding: 0.25rem 1rem;
-
-  cursor: pointer;
-}
-.search-result-card:hover {
-  background: #e6e6e6;
-}
-
-.search-result-card-info {
-  display: flex;
-  flex-direction: column;
 }
 
 .search-loading {
