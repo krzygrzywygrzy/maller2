@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AlgoliaLogo from "../../components/algoliaLogo/AlgoliaLogo";
 import ProductCard from "../../components/productCard/ProductCard";
 import useAlgoliaPhraseSearch from "../../utils/useAlgoliaPhraseSearch";
@@ -6,6 +6,10 @@ import "./results.css";
 
 const Results = ({ query }) => {
   const { data, loading, error } = useAlgoliaPhraseSearch(query);
+
+  useEffect(() => {
+    document.title = query + " | maller";
+  }, []);
 
   if (loading) return <div className="container mobile-margin">Loading...</div>;
   if (error)

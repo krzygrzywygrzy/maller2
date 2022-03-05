@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/actions/cartActions";
 import useGetProduct from "../../utils/useGetProduct";
@@ -13,6 +13,11 @@ const Product = ({ id }) => {
 
   const handleBasket = () =>
     dispatch(addToCart({ id, amount, price: data.price }));
+
+  useEffect(() => {
+    if (data) document.title = data.name + " | maller";
+    else document.title = "loading... | maller";
+  }, [data]);
 
   if (loading) return <div className="container mobile-margin">Loading...</div>;
   if (error)

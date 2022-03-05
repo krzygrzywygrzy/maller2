@@ -12,13 +12,19 @@ const Profile = () => {
   const [, setLocation] = useLocation();
   const goHome = useCallback(() => setLocation("/"), []);
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user) goHome();
+    onAuthStateChanged(auth, (u) => {
+      if (!u) goHome();
       else {
-        if (!user.data) dispatch(getUser(user.uid));
+        if (!user.data) dispatch(getUser(u.uid));
       }
     });
   }, [goHome, dispatch]);
+
+  useEffect(() => {
+    if (!user.data) document.title = "loading... | maller";
+    else
+      document.title = user.data.name + " " + user.data.surname + " | maller";
+  }, []);
 
   const handleLogOut = () => {
     signOut();

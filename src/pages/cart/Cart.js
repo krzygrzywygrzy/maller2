@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CartCard from "../../components/cartCard/CartCard";
 import "./cart.css";
@@ -11,6 +11,10 @@ const Cart = () => {
       t += product.amount * product.price;
     }
     return t;
+  }, [cart]);
+
+  useEffect(() => {
+    document.title = "cart (" + cart.length + ") | maller";
   }, [cart]);
 
   return (
