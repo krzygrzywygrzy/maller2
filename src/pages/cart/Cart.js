@@ -35,7 +35,7 @@ const Cart = () => {
 
       const orderId = v4();
       const ref = doc(db, `users/${auth.currentUser.uid}/orders`, orderId);
-      const order = { ...cart, id: orderId, ordered: Date.now() };
+      const order = { products: cart, id: orderId, ordered: Date.now() };
       setDoc(ref, order);
 
       setMessage("Check out process went successfully!");
