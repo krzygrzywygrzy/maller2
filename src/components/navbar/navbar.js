@@ -11,10 +11,12 @@ import SearchBox from "./SearchBox";
 import { useSelector } from "react-redux";
 import CategoryList from "./CategoryList";
 import useFirebaseFetch from "../../utils/useFirebaseFetch";
-import { collection, query } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import MobileMenu from "./MobileMenu";
+import useOutsideClick from "../../utils/useOutsideClick";
+import useButtonClicked from "../../utils/useButtonKlicked";
 
 const Navbar = () => {
   const [, setLocation] = useLocation();
@@ -40,10 +42,20 @@ const Navbar = () => {
     );
   }, []);
 
+  //handling search box
   useEffect(() => {
     if (phrase.length < 1) setShowSearchBox(false);
   }, [phrase]);
   const searchResultsRef = useRef();
+  useOutsideClick(searchResultsRef, () => setShowSearchBox(false));
+  useButtonClicked("Enter", () => {
+    setLocation(`/results/${phrase}`);
+    setShowSearchBox(false);
+  });
+
+  //handling categories list
+  const categoriesRef = useRef();
+  useOutsideClick(categoriesRef, () => setShowCategories(false));
 
   return (
     <div className="navbar">
@@ -104,7 +116,9 @@ const Navbar = () => {
         </div>
       </div>
       {showCategories && (
-        <CategoryList close={closeMenu} categories={categories} />
+        <div ref={categoriesRef}>
+          <CategoryList close={closeMenu} categories={categories} />
+        </div>
       )}
       {showMobileMenu && (
         <MobileMenu
