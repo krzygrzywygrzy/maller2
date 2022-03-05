@@ -38,3 +38,26 @@
   width: 100%;
   object-fit: cover;
 }
+
+@media (max-width: 1000px) {
+  .home-main {
+    flex-direction: column;
+  }
+
+  .home-sub-image,
+  .home-main {
+    width: calc(100% - 1rem);
+  }
+
+  .home-sub-image > img {
+    max-height: 320px;
+  }
+
+  .home-main-image {
+    width: 100%;
+  }
+
+  .home-sub {
+    margin-bottom: 1rem;
+  }
+}
