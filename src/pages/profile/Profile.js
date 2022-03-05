@@ -27,7 +27,7 @@ const Profile = () => {
   }, []);
 
   const handleLogOut = () => {
-    signOut();
+    signOut(auth);
     dispatch({ type: "logout_user" });
   };
 

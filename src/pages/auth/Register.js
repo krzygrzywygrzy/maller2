@@ -5,8 +5,11 @@ import { Link, useLocation } from "wouter";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../store/actions/userActions";
 
 const Register = () => {
+  const dispatch = useDispatch();
   const [, setLocation] = useLocation();
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
@@ -22,7 +25,9 @@ const Register = () => {
         surname: data.surname,
         id: res.user.uid,
         email: data.email,
+        orders: [],
       });
+      dispatch(getUser(res.user.uid));
       setLocation("/");
     } catch (err) {
       console.log(err);

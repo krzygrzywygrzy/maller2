@@ -1,9 +1,15 @@
-import React, { useCallback, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { doc, updateDoc } from "firebase/firestore";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "wouter";
 import CartCard from "../../components/cartCard/CartCard";
+import Popup from "../../components/popup/Popup";
+import { auth, db } from "../../firebase";
+import { getUser } from "../../store/actions/userActions";
 import "./cart.css";
 
 const Cart = () => {
+  const [, setLocation] = useLocation();
   const cart = useSelector((state) => state.cart);
   const total = useCallback(() => {
     let t = 0;
@@ -17,6 +23,27 @@ const Cart = () => {
     document.title = "cart (" + cart.length + ") | maller";
   }, [cart]);
 
+  const user = useSelector((state) => state.user.data);
+  const [loading, setLoading] = useState();
+  const [message, setMessage] = useState();
+  const handleCheckout = async () => {
+    try {
+      setLoading(true);
+
+      if (!auth.currentUser || !user)
+        throw Error("You must be logged in to check out!");
+
+      const ref = doc(db, "users", auth.currentUser.uid);
+      await updateDoc(ref, { orders: [...cart, ...user.orders] });
+
+      setMessage("Check out process went successfully!");
+    } catch (err) {
+      setMessage(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="container">
       {cart.length > 0 ? (
@@ -29,7 +56,9 @@ const Cart = () => {
           <div className="cart-summary">
             <span>Total: {total()}$</span>
             <br />
-            <button>Checkout</button>
+            <button onClick={handleCheckout}>
+              {loading ? "Loading..." : "Check out"}
+            </button>
           </div>
         </div>
       ) : (
@@ -37,6 +66,23 @@ const Cart = () => {
           <span className="empty-list-title">Your bakset is empty!</span>
         </div>
       )}
+      <Popup trigger={message !== undefined}>
+        <div className="checkout-popup">
+          <div>{message}</div>
+          <div className="checkout-clickable">
+            <span
+              onClick={() => {
+                if (message === "Check out process went successfully!")
+                  setLocation("/");
+
+                setMessage(undefined);
+              }}
+            >
+              close
+            </span>
+          </div>
+        </div>
+      </Popup>
     </div>
   );
 };

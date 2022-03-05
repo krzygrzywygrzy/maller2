@@ -13,7 +13,7 @@ const Product = ({ id }) => {
 
   const { data, loading, error } = useGetProduct(id);
   const [amount, setAmount] = useState(1);
-  const [cartPopup, setCartPopup] = useState(true);
+  const [cartPopup, setCartPopup] = useState(false);
 
   const handleBasket = () => {
     dispatch(addToCart({ id, amount, price: data.price }));
@@ -46,7 +46,7 @@ const Product = ({ id }) => {
               onChange={(e) => setAmount(parseInt(e.target.value))}
               min={1}
             />
-            <button onClick={() => handleBasket()}>Add to basket</button>
+            <button onClick={() => handleBasket()}>Add to cart</button>
           </div>
           <span>in stock: {data.inStock}</span>
           <div className="buy-form-additional">
@@ -71,7 +71,7 @@ const Product = ({ id }) => {
       </div>
       <Popup trigger={cartPopup}>
         <div className="cart-popup">
-          <div>This item wass added to your cart!!!</div>
+          <div>This item was added to your cart!!!</div>
           <div className="cart-popup-clickable">
             <span className="close" onClick={() => setCartPopup(false)}>
               close

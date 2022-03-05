@@ -4,13 +4,21 @@ import { useForm } from "react-hook-form";
 import "./auth.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../store/actions/userActions";
 
 const Login = () => {
   const [, setLocation] = useLocation();
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      const res = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      dispatch(getUser(res.user.uid));
       setLocation("/");
     } catch (err) {
       console.log(err);

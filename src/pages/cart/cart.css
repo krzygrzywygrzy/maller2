@@ -115,6 +115,27 @@ button:focus {
   outline: none;
 }
 
+.checkout-popup {
+  background: white;
+}
+
+.checkout-popup > div {
+  padding: 1rem;
+  width: 350px;
+}
+
+.checkout-clickable {
+  display: flex;
+  justify-content: end;
+}
+.checkout-clickable > span {
+  cursor: pointer;
+  background: #373f51;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 1000px) {
   .empty-list-title {
     font-size: 1.25rem;
@@ -145,5 +166,9 @@ button:focus {
     display: grid;
     flex-direction: column;
     justify-content: start;
+  }
+
+  .checkout-popup {
+    width: 90vw;
   }
 }
