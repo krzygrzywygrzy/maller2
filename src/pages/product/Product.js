@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useLocation } from "wouter";
+import Popup from "../../components/popup/Popup";
 import { addToCart } from "../../store/actions/cartActions";
 import useGetProduct from "../../utils/useGetProduct";
 import "./product.css";
 import ProductImage from "./ProductImage";
 
 const Product = ({ id }) => {
+  const [, setLocation] = useLocation();
   const dispatch = useDispatch();
 
   const { data, loading, error } = useGetProduct(id);
   const [amount, setAmount] = useState(1);
+  const [cartPopup, setCartPopup] = useState(true);
 
-  const handleBasket = () =>
+  const handleBasket = () => {
     dispatch(addToCart({ id, amount, price: data.price }));
+    setCartPopup(true);
+  };
 
   useEffect(() => {
     if (data) document.title = data.name + " | maller";
@@ -63,6 +69,19 @@ const Product = ({ id }) => {
           )}
         </div>
       </div>
+      <Popup trigger={cartPopup}>
+        <div className="cart-popup">
+          <div>This item wass added to your cart!!!</div>
+          <div className="cart-popup-clickable">
+            <span className="close" onClick={() => setCartPopup(false)}>
+              close
+            </span>
+            <span className="cart" onClick={() => setLocation("/cart")}>
+              go to cart
+            </span>
+          </div>
+        </div>
+      </Popup>
     </div>
   ) : (
     <></>
