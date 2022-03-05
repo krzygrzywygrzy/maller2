@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import "./navbar.css";
-import { HiSearch, HiUserCircle, HiShoppingCart } from "react-icons/hi";
+import {
+  HiSearch,
+  HiUserCircle,
+  HiShoppingCart,
+  HiMenuAlt4,
+} from "react-icons/hi";
 import SearchBox from "./SearchBox";
 import { useSelector } from "react-redux";
 import CategoryList from "./CategoryList";
@@ -9,6 +14,7 @@ import useFirebaseFetch from "../../utils/useFirebaseFetch";
 import { collection } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import MobileMenu from "./MobileMenu";
 
 const Navbar = () => {
   const [, setLocation] = useLocation();
@@ -16,6 +22,7 @@ const Navbar = () => {
   const [phrase, setPhrase] = useState("");
   const [showSearchBox, setShowSearchBox] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const categories = useFirebaseFetch(collection(db, "categories"));
 
@@ -68,6 +75,12 @@ const Navbar = () => {
             </div>
           </Link>
         </div>
+        <div
+          className="burger-menu"
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+        >
+          <HiMenuAlt4 size={24} />
+        </div>
       </div>
       <div className="category-container">
         <div
@@ -79,6 +92,12 @@ const Navbar = () => {
       </div>
       {showCategories && (
         <CategoryList close={closeMenu} categories={categories} />
+      )}
+      {showMobileMenu && (
+        <MobileMenu
+          close={() => setShowMobileMenu(false)}
+          loggedIn={loggedIn}
+        />
       )}
     </div>
   );

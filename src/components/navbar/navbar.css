@@ -127,32 +127,33 @@ li:hover,
   display: none;
 }
 
-.phone-menu {
+.mobile-menu {
   position: absolute;
   background: rgba(0, 0, 0, 0.2);
   width: 100%;
   height: calc(100vh - 100%);
 }
 
-.phone-menu-container {
+.mobile-menu-container {
   width: 75%;
   background: white;
 }
 
-.phone-menu-item {
+.mobile-menu-item {
   padding: 0.5rem;
   border-bottom: 1px solid #e6e6e6;
 
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
-.phone-menu-category {
+.mobile-menu-category {
   font-weight: 400;
   padding: 0.5rem;
 }
 
-.phone-menu-search {
+.mobile-menu-search {
   display: flex;
   flex-direction: row;
   align-items: center;
