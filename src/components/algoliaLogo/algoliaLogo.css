@@ -1,0 +1,12 @@
+.algolia-logo {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-size: 0.9rem;
+  margin: 0.25rem 1rem;
+}
+
+.algolia-logo > img {
+  height: 15px;
+  margin-left: 0.5rem;
+}

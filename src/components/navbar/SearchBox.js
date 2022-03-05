@@ -1,5 +1,6 @@
 import React from "react";
 import useAlgoliaPhraseSearch from "../../utils/useAlgoliaPhraseSearch";
+import AlgoliaLogo from "../algoliaLogo/AlgoliaLogo";
 import SearchResultCard from "../searchResultCard/SearchResultCard";
 
 const SearchBox = ({ query, close }) => {
@@ -12,6 +13,7 @@ const SearchBox = ({ query, close }) => {
           return <SearchResultCard result={result} key={index} close={close} />;
         } else return <></>;
       })}
+      <AlgoliaLogo />
     </div>
   ) : (
     <div className="search-loading">...</div>

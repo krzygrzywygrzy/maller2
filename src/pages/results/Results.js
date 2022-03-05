@@ -1,4 +1,5 @@
 import React from "react";
+import AlgoliaLogo from "../../components/algoliaLogo/AlgoliaLogo";
 import ProductCard from "../../components/productCard/ProductCard";
 import useAlgoliaPhraseSearch from "../../utils/useAlgoliaPhraseSearch";
 import "./results.css";
@@ -12,6 +13,7 @@ const Results = ({ query }) => {
 
   return data ? (
     <div className="container">
+      <AlgoliaLogo />
       {data.length > 0 ? (
         <div className="product-grid">
           {data.map((product) => (
