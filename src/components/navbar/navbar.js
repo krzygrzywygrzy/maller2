@@ -68,7 +68,7 @@ const Navbar = () => {
             type="text"
             onChange={handleChange}
             value={phrase}
-            placeholder="BMTH, Neighbourhood..."
+            placeholder="rock, metal..."
           />
           <HiSearch size={18} />
           {showSearchBox && (

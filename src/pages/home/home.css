@@ -1,0 +1,12 @@
+.home {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .home {
+    margin: 1rem 1rem;
+    width: calc(100% - 1rem);
+    flex-direction: column;
+  }
+}
