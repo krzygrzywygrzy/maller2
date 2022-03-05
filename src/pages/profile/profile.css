@@ -55,6 +55,14 @@
   font-size: 1.25rem;
 }
 
+.profile-orders > .title {
+  font-size: 1.5rem;
+}
+
+.orders-display {
+  margin-top: 0.5rem;
+}
+
 @media (max-width: 1000px) {
   .profile {
     display: flex;

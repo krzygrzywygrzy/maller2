@@ -10,6 +10,7 @@ const Profile = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [, setLocation] = useLocation();
+  // eslint-disable-next-line
   const goHome = useCallback(() => setLocation("/"), []);
   useEffect(() => {
     onAuthStateChanged(auth, (u) => {
@@ -18,12 +19,16 @@ const Profile = () => {
         if (!user.data) dispatch(getUser(u.uid));
       }
     });
+    // eslint-disable-next-line
   }, [goHome, dispatch]);
 
   useEffect(() => {
     if (!user.data) document.title = "loading... | maller";
     else
       document.title = user.data.name + " " + user.data.surname + " | maller";
+
+    console.log(user);
+    // eslint-disable-next-line
   }, []);
 
   const handleLogOut = () => {
@@ -34,13 +39,16 @@ const Profile = () => {
   if (user.loading) return <div className="container">Loding...</div>;
   if (user.error) return <div className="container">Error: {user.error}</div>;
 
-  return (
+  return user.data ? (
     <div className="container profile">
-      <div>
-        <section>
-          <div></div>
-        </section>
-      </div>
+      <section className="profile-orders">
+        <div className="title">Your orders</div>
+        {user.data.orders.length > 0 ? (
+          <div className="orders-display"></div>
+        ) : (
+          <div className="orders-display">You have no orders yet!</div>
+        )}
+      </section>
       <div>
         {user.data && (
           <div className="profile-info">
@@ -57,6 +65,8 @@ const Profile = () => {
         )}
       </div>
     </div>
+  ) : (
+    <></>
   );
 };
 

@@ -1,11 +1,10 @@
 import { doc, updateDoc } from "firebase/firestore";
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation } from "wouter";
 import CartCard from "../../components/cartCard/CartCard";
 import Popup from "../../components/popup/Popup";
 import { auth, db } from "../../firebase";
-import { getUser } from "../../store/actions/userActions";
 import "./cart.css";
 
 const Cart = () => {
