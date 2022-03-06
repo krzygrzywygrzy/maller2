@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "wouter";
-import Navbar from "../components/navbar/Navbar";
 import Home from "./home/Home";
 import Cart from "./cart/Cart";
 import Results from "./results/Results";
@@ -13,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../store/actions/userActions";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import Navbar from "../components/navbar/Navbar";
 
 const Router = () => {
   const [loggedIn, setLoggedIn] = useState(false);
