@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../store/actions/userActions";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import Navbar from "../components/navbar/navbar";
 
 const Router = () => {
   const [loggedIn, setLoggedIn] = useState(false);
