@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/navbar/Navbar";
 import { Route } from "wouter";
 import Home from "./home/Home";
 import Cart from "./cart/Cart";
