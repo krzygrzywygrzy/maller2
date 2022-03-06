@@ -5,7 +5,6 @@ import { useLocation } from "wouter";
 import "./profile.css";
 import { auth } from "../../firebase";
 import { getUser } from "../../store/actions/userActions";
-import OrderCard from "../../components/orderCard/OrderCard";
 import Orders from "./Orders";
 
 const Profile = () => {

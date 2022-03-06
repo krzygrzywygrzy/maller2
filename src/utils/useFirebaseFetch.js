@@ -24,6 +24,7 @@ const useFirebaseFetch = (query) => {
     };
 
     get();
+    // eslint-disable-next-line
   }, []);
 
   return { data, loading, error };

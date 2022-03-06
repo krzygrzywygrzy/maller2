@@ -9,7 +9,7 @@ const Results = ({ query }) => {
 
   useEffect(() => {
     document.title = query + " | maller";
-  }, []);
+  }, [query]);
 
   if (loading) return <div className="container mobile-margin">Loading...</div>;
   if (error)

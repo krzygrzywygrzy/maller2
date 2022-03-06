@@ -9,8 +9,8 @@ const useGetProduct = (id) => {
   useEffect(() => {
     const get = async () => {
       try {
-        // eslint-disable-next-line
         var res = await algolia_products.findObject(
+          // eslint-disable-next-line
           (hit) => hit.objectID == id
         );
         setData(res.object);

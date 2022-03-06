@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import algolia_products from "../algolia";
 
-const useAlgoliaPhraseSearch = (query) => {
+const useAlgoliaPhraseSearch = (query, filters) => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -13,6 +13,7 @@ const useAlgoliaPhraseSearch = (query) => {
           setLoading(true);
           var res = await algolia_products.search(query, {
             attributesToRetrieve: ["name", "price", "image"],
+            filters: filters ?? undefined,
           });
           setData(res.hits);
         }
@@ -23,7 +24,7 @@ const useAlgoliaPhraseSearch = (query) => {
       }
     };
     get();
-  }, [query]);
+  }, [query, filters]);
 
   return { data, loading, error };
 };
